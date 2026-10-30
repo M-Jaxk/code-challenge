@@ -56,3 +56,6 @@ npm run preview
 - `balances/index.html` and `balances/balances.js`: balances page and its rendering logic.
 - `shared/balances-store.js`: initial demo balances and local-storage persistence shared by both pages.
 - `vite.config.js`: Vite multi-page build configuration.
+
+## Flow Chart
+![Execution flow](./flowchart.png)

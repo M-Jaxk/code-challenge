@@ -1,6 +1,6 @@
 # Problem 2: Orbit Token Swap
 
-Orbit is a responsive, two-page token swap demo built with Vite and vanilla JavaScript. The swap page calculates indicative quotes from the supplied token price feed. A balances page shows the demo holdings and estimated values.
+Orbit is a responsive, two-page token swap demo built with Vite and TypeScript. The swap page calculates indicative quotes from the supplied token price feed. A balances page shows the demo holdings and estimated values.
 
 ## Run locally
 
@@ -12,6 +12,8 @@ npm run dev
 ```
 
 Open the URL printed by Vite. The main swap page is `/`; the balances page is `/balances/`.
+
+Check TypeScript with `npm run typecheck`.
 
 Create and preview a production build with:
 
@@ -42,19 +44,17 @@ npm run preview
 - Prices are loaded from [Switcheo's price feed](https://interview.switcheo.com/prices.json). The feed can contain multiple records for one currency; the app uses the record with the latest date.
 - The price snapshot may be stale or unavailable. Quotes and portfolio values are indicative only.
 - Token icons are loaded from [Switcheo's token-icons repository](https://github.com/Switcheo/token-icons/tree/main/tokens), using the token symbol as the SVG filename. The app remains usable if an icon is missing.
-- Initial demo balances are defined in `shared/balances-store.js`. Simulated swaps update them in browser local storage under `orbit-demo-balances-v1`; no wallet is connected and no assets move.
+- Initial demo balances are defined in `src/shared/balance.service.ts`. Simulated swaps update them in browser local storage under `orbit-demo-balances-v1`; no wallet is connected and no assets move.
 - To reset the demo balances, clear the `orbit-demo-balances-v1` entry from local storage for this site. The initial balances will be restored on reload.
 
 ## Code layout
 
-- `index.html`, `script.js`, and `style.css`: swap page markup, entry point, and shared styling.
-- `swap/swap-controller.js`: page event wiring and coordination.
-- `swap/price-service.js`: loading and normalization of token prices.
-- `swap/swap-form.js`: amount validation, quote calculation, and form rendering.
-- `swap/token-picker.js`: searchable token selection.
-- `swap/format.js`: amount and currency formatting.
-- `balances/index.html` and `balances/balances.js`: balances page and its rendering logic.
-- `shared/balances-store.js`: initial demo balances and local-storage persistence shared by both pages.
+- `index.html` and `style.css`: swap page markup and shared styling.
+- `src/features/swap/`: swap page route, controller, price/swap services, token picker, and swap validation.
+- `src/features/balances/`: balances page markup, route, and controller. Vite maps this page to `/balances/`.
+- `src/shared/`: DOM, formatting, token icons, and demo balance persistence used by both features.
+- `src/errors/`: user-facing errors and toast handling.
+- `src/types/`: shared TypeScript declarations for prices, balances, selections, and quotes.
 - `vite.config.js`: Vite multi-page build configuration.
 
 ## Flow Chart

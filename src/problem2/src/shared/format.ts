@@ -1,4 +1,4 @@
-export function formatAmount(value, maximumFractionDigits = 6) {
+export function formatAmount(value: number, maximumFractionDigits = 6): string {
   if (!Number.isFinite(value)) return '0';
   return new Intl.NumberFormat('en-US', {
     maximumFractionDigits,
@@ -6,7 +6,7 @@ export function formatAmount(value, maximumFractionDigits = 6) {
   }).format(value);
 }
 
-export function formatUsd(value) {
+export function formatUsd(value: number): string {
   if (!Number.isFinite(value)) return '—';
   return new Intl.NumberFormat('en-US', {
     style: 'currency',

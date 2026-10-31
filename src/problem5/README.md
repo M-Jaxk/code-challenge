@@ -25,6 +25,18 @@ Database files are stored in `data/pglite` by default. Delete that directory to 
 
 `npm run typecheck` checks the TypeScript source.
 
+## Source structure
+
+- `src/server.ts` initializes the database and optional local PostgreSQL-compatible socket, starts HTTP, and handles shutdown.
+- `src/app.ts` configures Express middleware and mounts application routes.
+- `src/routes/` maps HTTP paths and methods to controller functions.
+- `src/controllers/` handles request/response flow and calls the service layer.
+- `src/services/` contains resource persistence and database query logic.
+- `src/validations/` parses and validates request bodies, route IDs, and list query parameters.
+- `src/errors/` defines HTTP-aware errors and central JSON error/not-found handlers.
+- `src/types/` contains shared resource, database-row, and API response declarations.
+- `src/database.ts` creates the PGlite connection and initializes the schema.
+
 ## Automated endpoint tests
 
 Run the API tests with:

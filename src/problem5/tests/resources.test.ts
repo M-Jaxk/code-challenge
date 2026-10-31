@@ -3,7 +3,7 @@ import { after, before, test } from 'node:test';
 import type { AddressInfo } from 'node:net';
 import type { Server } from 'node:http';
 
-let app!: typeof import('../src/server.js')['app'];
+let app!: typeof import('../src/app.js')['app'];
 let database!: typeof import('../src/database.js')['database'];
 let initializeDatabase!: typeof import('../src/database.js')['initializeDatabase'];
 let server: Server;
@@ -12,7 +12,7 @@ let baseUrl: string;
 before(async () => {
   process.env.NODE_ENV = 'test';
   process.env.PGLITE_DATA_DIR = 'memory://';
-  ({ app } = await import('../src/server.js'));
+  ({ app } = await import('../src/app.js'));
   ({ database, initializeDatabase } = await import('../src/database.js'));
   await initializeDatabase();
   server = app.listen(0);
